@@ -5,7 +5,18 @@
 #SBATCH --output=%N-%j.out  # %N for node name, %j for jobID
 #SBATCH --account=rrg-lelis
 
-module load python/3.6
-source tensorflow/bin/activate
+module load StdEnv/2020
+module load python/3.8.2
+source $HOME/hlevin-env/bin/activate
+cd $SLURM_TMPDIR
+pip freeze > requirements.txt
+python -m venv env
+deactivate
+source env/bin/activate
+pip install --no-index --upgrade pip
+pip install --no-index -r requirements.txt
+
+cd /scratch/tjhia/h-levin
+
 python src/main.py ${scheme} -a ${algorithm} -l ${loss} -m ${model} -p problems/stp/puzzles_5x5_train/ --learn -d SlidingTile -b 7000 -g 10
 

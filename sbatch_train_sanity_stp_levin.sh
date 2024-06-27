@@ -5,12 +5,13 @@ declare -a losses=("LevinLoss")
 output="output_train_sanity_stp/"
 domain_name="5x5-stp-"
 
-heuristic_scheme=("--learned-heuristic" "")
+heuristic_scheme=("--learned-heuristic")
 algorithm="Levin"
 
 scheduler="online"
 
-for iter in {1..5}; do
+#for iter in {1..5}; do
+for iter in {1..1}; do
 	for scheme in "${heuristic_scheme[@]}"; do
 		for loss in ${losses[@]}; do
 			lower_loss=$(echo ${loss} | tr "A-Z" "a-z")
@@ -24,7 +25,7 @@ for iter in {1..5}; do
 			#echo ${output_exp}
 			#echo ${model}
 
-			sbatch --output=${output_exp} --export=scheme="${scheme}",algorithm=${algorithm},loss=${loss},model=${model} run_bootstrap_train_stp.sh
+			sbatch --output=${output_exp} --export=scheme="${scheme}",algorithm=${algorithm},loss=${loss},model=${model} run_bootstrap_train_sanity_stp.sh
 		done
 	done
 done
