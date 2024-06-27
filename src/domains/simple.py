@@ -3,6 +3,7 @@ import math
 from domains.environment import Environment
 import copy
 
+
 class SimpleEnv(Environment):
 
     def __init__(self, branch, solution_path, printp=False):
@@ -18,21 +19,25 @@ class SimpleEnv(Environment):
         self._path = []
 
     def __hash__(self):
-        return hash(str( self._path ))
+        return hash(str(self._path))
 
     def __eq__(self, other):
-        return self._branch == other._branch and self._solution_path == other._solution_path
+        return (
+            self._branch == other._branch
+            and self._solution_path == other._solution_path
+        )
 
     def successors(self):
         actions = list(range(self._branch))
 
-        return actions;
+        return actions
 
     def successors_parent_pruning(self, op):
         return self.successors()
 
     def apply_action(self, action):
-        if printp: print("path = {} action = {}".format(self._path, action))
+        if printp:
+            print("path = {} action = {}".format(self._path, action))
         self._path.append(action)
 
     def is_solution(self):
