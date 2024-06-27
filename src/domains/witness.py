@@ -1,9 +1,9 @@
 import numpy as np
-import matplotlib
+# import matplotlib
 from domains.environment import Environment
 
 # matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import random
 from collections import deque
 import copy
@@ -456,130 +456,131 @@ class WitnessState(Environment):
         need adjustment as one changes the size of the puzzle. For example, the size of the figure is set to be fixed
         to [5, 5] (see below).
         """
-        fig = plt.figure(figsize=[5, 5])
-        fig.patch.set_facecolor((1, 1, 1))
+        pass
+        # fig = plt.figure(figsize=[5, 5])
+        # fig.patch.set_facecolor((1, 1, 1))
 
-        ax = fig.add_subplot(111)
+        # ax = fig.add_subplot(111)
 
-        # draw vertical lines of the grid
-        for y in range(self._dots.shape[1]):
-            ax.plot([y, y], [0, self._cells.shape[0]], "k")
-        # draw horizontal lines of the grid
-        for x in range(self._dots.shape[0]):
-            ax.plot([0, self._cells.shape[1]], [x, x], "k")
+        # # draw vertical lines of the grid
+        # for y in range(self._dots.shape[1]):
+        #     ax.plot([y, y], [0, self._cells.shape[0]], "k")
+        # # draw horizontal lines of the grid
+        # for x in range(self._dots.shape[0]):
+        #     ax.plot([0, self._cells.shape[1]], [x, x], "k")
 
-        # scale the axis area to fill the whole figure
-        ax.set_position([0, 0, 1, 1])
+        # # scale the axis area to fill the whole figure
+        # ax.set_position([0, 0, 1, 1])
 
-        ax.set_axis_off()
+        # ax.set_axis_off()
 
-        ax.set_xlim(-1, np.max(self._dots.shape))
-        ax.set_ylim(-1, np.max(self._dots.shape))
+        # ax.set_xlim(-1, np.max(self._dots.shape))
+        # ax.set_ylim(-1, np.max(self._dots.shape))
 
-        # Draw the vertical segments of the path
-        for i in range(self._v_seg.shape[0]):
-            for j in range(self._v_seg.shape[1]):
-                if self._v_seg[i][j] == 1:
-                    ax.plot([j, j], [i, i + 1], "r", linewidth=5)
+        # # Draw the vertical segments of the path
+        # for i in range(self._v_seg.shape[0]):
+        #     for j in range(self._v_seg.shape[1]):
+        #         if self._v_seg[i][j] == 1:
+        #             ax.plot([j, j], [i, i + 1], "r", linewidth=5)
 
-        # Draw the horizontal segments of the path
-        for i in range(self._h_seg.shape[0]):
-            for j in range(self._h_seg.shape[1]):
-                if self._h_seg[i][j] == 1:
-                    ax.plot([j, j + 1], [i, i], "r", linewidth=5)
+        # # Draw the horizontal segments of the path
+        # for i in range(self._h_seg.shape[0]):
+        #     for j in range(self._h_seg.shape[1]):
+        #         if self._h_seg[i][j] == 1:
+        #             ax.plot([j, j + 1], [i, i], "r", linewidth=5)
 
-        # Draw the separable bullets according to the values in self._cells and self._colors
-        offset = 0.5
-        for i in range(self._cells.shape[0]):
-            for j in range(self._cells.shape[1]):
-                if self._cells[i][j] != 0:
-                    ax.plot(
-                        j + offset,
-                        i + offset,
-                        "o",
-                        markersize=15,
-                        markeredgecolor=(0, 0, 0),
-                        markerfacecolor=self._colors[int(self._cells[i][j] - 1)],
-                        markeredgewidth=2,
-                    )
+        # # Draw the separable bullets according to the values in self._cells and self._colors
+        # offset = 0.5
+        # for i in range(self._cells.shape[0]):
+        #     for j in range(self._cells.shape[1]):
+        #         if self._cells[i][j] != 0:
+        #             ax.plot(
+        #                 j + offset,
+        #                 i + offset,
+        #                 "o",
+        #                 markersize=15,
+        #                 markeredgecolor=(0, 0, 0),
+        #                 markerfacecolor=self._colors[int(self._cells[i][j] - 1)],
+        #                 markeredgewidth=2,
+        #             )
 
-        # Draw the intersection of lines: red for an intersection that belongs to a path and black otherwise
-        for i in range(self._dots.shape[0]):
-            for j in range(self._dots.shape[1]):
-                if self._dots[i][j] != 0:
-                    ax.plot(
-                        j,
-                        i,
-                        "o",
-                        markersize=10,
-                        markeredgecolor=(0, 0, 0),
-                        markerfacecolor="r",
-                        markeredgewidth=0,
-                    )
-                else:
-                    ax.plot(
-                        j,
-                        i,
-                        "o",
-                        markersize=10,
-                        markeredgecolor=(0, 0, 0),
-                        markerfacecolor="k",
-                        markeredgewidth=0,
-                    )
+        # # Draw the intersection of lines: red for an intersection that belongs to a path and black otherwise
+        # for i in range(self._dots.shape[0]):
+        #     for j in range(self._dots.shape[1]):
+        #         if self._dots[i][j] != 0:
+        #             ax.plot(
+        #                 j,
+        #                 i,
+        #                 "o",
+        #                 markersize=10,
+        #                 markeredgecolor=(0, 0, 0),
+        #                 markerfacecolor="r",
+        #                 markeredgewidth=0,
+        #             )
+        #         else:
+        #             ax.plot(
+        #                 j,
+        #                 i,
+        #                 "o",
+        #                 markersize=10,
+        #                 markeredgecolor=(0, 0, 0),
+        #                 markerfacecolor="k",
+        #                 markeredgewidth=0,
+        #             )
 
-        # Draw the entrance of the puzzle in red as it is always on the state's path
-        ax.plot(
-            self._column_init - 0.15,
-            self._line_init,
-            ">",
-            markersize=10,
-            markeredgecolor=(0, 0, 0),
-            markerfacecolor="r",
-            markeredgewidth=0,
-        )
+        # # Draw the entrance of the puzzle in red as it is always on the state's path
+        # ax.plot(
+        #     self._column_init - 0.15,
+        #     self._line_init,
+        #     ">",
+        #     markersize=10,
+        #     markeredgecolor=(0, 0, 0),
+        #     markerfacecolor="r",
+        #     markeredgewidth=0,
+        # )
 
-        column_exit_offset = 0
-        line_exit_offset = 0
+        # column_exit_offset = 0
+        # line_exit_offset = 0
 
-        if self._column_goal == self._columns:
-            column_exit_offset = 0.15
-            exit_symbol = ">"
-        elif self._column_goal == 0:
-            column_exit_offset = -0.15
-            exit_symbol = "<"
-        elif self._line_goal == self._lines:
-            line_exit_offset = 0.15
-            exit_symbol = "^"
-        else:
-            line_exit_offset = -0.15
-            exit_symbol = "v"
-        # Draw the exit of the puzzle: red if it is on a path, black otherwise
-        if self._dots[self._line_goal][self._column_goal] == 0:
-            ax.plot(
-                self._column_goal + column_exit_offset,
-                self._line_goal + line_exit_offset,
-                exit_symbol,
-                markersize=10,
-                markeredgecolor=(0, 0, 0),
-                markerfacecolor="k",
-                markeredgewidth=0,
-            )
-        else:
-            ax.plot(
-                self._column_goal + column_exit_offset,
-                self._line_goal + line_exit_offset,
-                exit_symbol,
-                markersize=10,
-                markeredgecolor=(0, 0, 0),
-                markerfacecolor="r",
-                markeredgewidth=0,
-            )
+        # if self._column_goal == self._columns:
+        #     column_exit_offset = 0.15
+        #     exit_symbol = ">"
+        # elif self._column_goal == 0:
+        #     column_exit_offset = -0.15
+        #     exit_symbol = "<"
+        # elif self._line_goal == self._lines:
+        #     line_exit_offset = 0.15
+        #     exit_symbol = "^"
+        # else:
+        #     line_exit_offset = -0.15
+        #     exit_symbol = "v"
+        # # Draw the exit of the puzzle: red if it is on a path, black otherwise
+        # if self._dots[self._line_goal][self._column_goal] == 0:
+        #     ax.plot(
+        #         self._column_goal + column_exit_offset,
+        #         self._line_goal + line_exit_offset,
+        #         exit_symbol,
+        #         markersize=10,
+        #         markeredgecolor=(0, 0, 0),
+        #         markerfacecolor="k",
+        #         markeredgewidth=0,
+        #     )
+        # else:
+        #     ax.plot(
+        #         self._column_goal + column_exit_offset,
+        #         self._line_goal + line_exit_offset,
+        #         exit_symbol,
+        #         markersize=10,
+        #         markeredgecolor=(0, 0, 0),
+        #         markerfacecolor="r",
+        #         markeredgewidth=0,
+        #     )
 
-        if save_file:
-            plt.savefig(filename)
-            plt.close()
-        else:
-            plt.show()
+        # if save_file:
+        #     plt.savefig(filename)
+        #     plt.close()
+        # else:
+        #     plt.show()
 
     def __successor_bfs(self, state):
         """
