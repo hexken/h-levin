@@ -375,7 +375,11 @@ def main():
 
         states = states_capped
 
-    print("Loaded ", len(states), " instances")
+    arg_dict = {k: str(v) for k, v in vars(parameters).items()}
+    for k, v in arg_dict.items():
+        print(f"{k}: {v}")
+
+    print("\nLoaded ", len(states), " instances")
     #     input_size = s.get_image_representation().shape
 
     KerasManager.register("KerasModel", KerasModel)
