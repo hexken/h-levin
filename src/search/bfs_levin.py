@@ -318,6 +318,7 @@ class BFSLevin:
 
         expanded = 0
         generated = 0
+        print("Attempting puzzle ", puzzle_name, " with budget: ", budget)
 
         #         print('Attempting puzzle ', puzzle_name, ' with budget: ', budget)
         #         return False, None, expanded, generated, puzzle_name
@@ -359,6 +360,7 @@ class BFSLevin:
             probability_distribution_log = node.get_probability_distribution_actions()
 
             if expanded >= budget:
+                print("Exceeded budget in puzzle: ", puzzle_name)
                 return False, None, expanded, generated, puzzle_name
 
             for a in actions:
