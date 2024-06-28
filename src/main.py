@@ -203,6 +203,12 @@ def main():
         default="1.0",
         help="Constant C used with PUCT.",
     )
+    parser.add_argument(
+        "-shuffle",
+        action="store_true",
+        default=False,
+        help="Shuffle problems for bootstrap",
+    )
 
     parser.add_argument(
         "-time",
@@ -403,6 +409,7 @@ def main():
                 ncpus=ncpus,
                 initial_budget=int(parameters.search_budget),
                 gradient_steps=int(parameters.gradient_steps),
+                shuffle=parameters.shuffle,
             )
 
         if parameters.search_algorithm == "PUCT":

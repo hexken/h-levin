@@ -1,13 +1,25 @@
 import os
 import time
+import random
 from os.path import join
 from models.memory import Memory
 from concurrent.futures.process import ProcessPoolExecutor
 
 
 class Bootstrap:
-    def __init__(self, states, output, ncpus=1, initial_budget=2000, gradient_steps=10):
-        self._states = states
+    def __init__(
+        self,
+        states,
+        output,
+        ncpus=1,
+        initial_budget=2000,
+        gradient_steps=10,
+        shuffle=False,
+    ):
+        self._states = [(k, v) for k, v in states.items()]
+        self._shuffle = shuffle
+        if self._shuffle:
+            random.shuffle(self._states)
         self._model_name = output
         self._number_problems = len(states)
 
@@ -28,7 +40,7 @@ class Bootstrap:
         if not os.path.exists(self._log_folder):
             os.makedirs(self._log_folder)
 
-    def solve_uniform_online(self, planner, nn_model):
+    def solve_uniform_online(self, planner, nn_model, shuffle=False):
         iteration = 1
         number_solved = 0
         total_expanded = 0
@@ -40,13 +52,13 @@ class Bootstrap:
 
         current_solved_puzzles = set()
 
-        last_puzzle = list(self._states)[-1]
+        last_puzzle = self._states[-1][0]
 
         while len(current_solved_puzzles) < self._number_problems:
             number_solved = 0
 
             batch_problems = {}
-            for name, state in self._states.items():
+            for name, state in self._states:
 
                 #                 if name in current_solved_puzzles:
                 #                     continue
